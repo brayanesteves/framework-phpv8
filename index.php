@@ -1,3 +1,3 @@
 <?php
-    echo "Framework PHP v8"
+    echo "Framework PHP v8";
 ?>
