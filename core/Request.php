@@ -12,5 +12,21 @@
             self::$script_filename = $_SERVER['SCRIPT_FILENAME']; // Directory project
             self::$document_root   = $_SERVER['DOCUMENT_ROOT'];
         }
+
+        public static function getURL() {
+            $path_origin = self::$script_filename;
+            $path_main   = self::$document_root . self::$php_self;
+            $request_url = str_replace($path_origin, '', $path_main);
+            return empty($request_url) ? '/' : $request_url;
+        }
+
+        public static function getPublicURL() {
+            $path_origin = self::$script_filename;
+            $request_uri = self::$request_uri;
+            $path_main   = self::$document_root . self::$php_self;
+            $request_url = str_replace($path_origin, '', $path_main);
+            $public_path = str_replace($request_url, '', $request_uri);
+            return $public_path;
+        }
     }
 ?>
