@@ -28,5 +28,21 @@
             $public_path = str_replace($request_url, '', $request_uri);
             return $public_path;
         }
+
+        public static function validate($routes) {
+            foreach($routes as $route) {
+                $regex_route = preg_replace_callback(
+                    '/{([^}]+)}/',
+                    function($matches) {
+                        return "(?P<" . $matches[1] . ">[^/]+)";
+                    },
+                    $route['path']
+                );
+                $regex_route = str_replace("/", "\/", $regex_route);
+                $regex_route = '/' . $regex_route . '$/';
+                echo $regex_route;
+            }
+        }
+
     }
 ?>

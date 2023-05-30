@@ -2,6 +2,8 @@
     use Core\Route;
 
     Route::get  ('/', "Ruta inicial GET");
+    Route::get  ('/api/{id}', "Ruta inicial GET");
+    Route::get  ('/persona/{id}-{nombre}', "Ruta inicial GET");
     Route::post ('/', "Ruta inicial POST");
     Route::group('/producto', function() {
         Route::get  ('/id', "Producto 'id' - GET");
@@ -10,5 +12,5 @@
 
     $routes = Route::getRoutes();
 
-    print_r($routes);
+    //print_r($routes);
 ?>
