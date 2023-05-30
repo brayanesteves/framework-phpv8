@@ -1,10 +1,20 @@
 <?php
     use Core\Route;
 
-    Route::get  (                    '/', "Route init GET");
-    Route::get  (            '/api/{id}', "Route init GET");
-    Route::get  ('/person/{id}-{nombre}', "Route init GET");
-    Route::post (           '/test-post', "Route init POST");
+    /**
+     *  Name Class: ProductController,
+     * Name method: index
+     */
+    Route::get  (                    '/', "ProductController@index");
+    Route::get  (           '/test-view', function() {
+        return ["id" => 1];
+    });
+    Route::get  (            '/api/{id}', "ProductController@show");
+    Route::get  (           '/test/{id}', function($route) {
+        return $route['id'];
+    });
+    Route::get  ('/person/{id}-{nombre}', "PersonController@index");
+    Route::post (           '/test-post', "Test@index");
     Route::group(             '/product', function() {
         Route::get (         '/id', "Product 'id' - GET");
         Route::post(         '/id', "Product 'id' - POST");

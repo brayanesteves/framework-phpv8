@@ -45,7 +45,28 @@
                 $regex_route = str_replace("/", "\/", $regex_route);
                 $regex_route = '/' . $regex_route . '$/';
                 if(preg_match($regex_route, $url, $matches)) {
-                    echo "Route exists.";
+                    $params = [];
+                    foreach($matches as $key => $value) {
+                        $params[$key] = $value;
+                    }
+                    unset($params[0]);
+                    //print_r($params);
+                    if(is_string($route['class'])) {
+                        echo "Controller.";
+                    }
+                    if(is_callable($route['class'])) {
+                        $response = $route['class']($params);
+                        if(is_array($response)) {
+                            $response = json_encode($response);
+                            header('Content-Type: application/type');
+                            echo $response;
+                            return false;
+                        } else {
+                            header('Content-Type: application/type');
+                            echo $response;
+                            return $response;
+                        }
+                    }
                 }
             }
         }
