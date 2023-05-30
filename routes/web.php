@@ -5,14 +5,16 @@
      *  Name Class: ProductController,
      * Name method: index
      */
-    Route::get  (                    '/', "ProductController@index");
+    Route::get  (                    '/', "MainController@index");
     Route::get  (           '/test-view', function() {
         return ["id" => 1];
     });
     Route::get  (            '/api/{id}', "ProductController@show");
+    Route::get  (           '/main/{id}', "MainController@show");
     Route::get  (           '/test/{id}', function($route) {
         return $route['id'];
     });
+    Route::get  (         '/person/{id}', "MainController@show");
     Route::get  ('/person/{id}-{nombre}', "PersonController@index");
     Route::post (           '/test-post', "Test@index");
     Route::group(             '/product', function() {

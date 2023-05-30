@@ -50,25 +50,43 @@
                         $params[$key] = $value;
                     }
                     unset($params[0]);
-                    //print_r($params);
+                    // print_r($params);
                     if(is_string($route['class'])) {
-                        echo "Controller.";
+                        // echo "Controller.";
+                        $route_class = $route['class'];
+                        $array_class = explode('@', $route_class);
+                        $controller  = new $array_class[0]();
+                        $method      = $array_class[1];
+
+                        $response = $controller->$method(...array_values($params));
+                        if(is_array($response)) {
+                            $response = json_encode($response);
+                            header('Content-Type: application/json');
+                            echo $response;
+                            return false;
+                        } else {
+                            header('Content-Type: application/json');
+                            echo $response;
+                            return $response;
+                        }
                     }
                     if(is_callable($route['class'])) {
                         $response = $route['class']($params);
                         if(is_array($response)) {
                             $response = json_encode($response);
-                            header('Content-Type: application/type');
+                            header('Content-Type: application/json');
                             echo $response;
                             return false;
                         } else {
-                            header('Content-Type: application/type');
+                            header('Content-Type: application/json');
                             echo $response;
                             return $response;
                         }
                     }
                 }
             }
+            echo "404";
+            return "404";
         }
 
     }
