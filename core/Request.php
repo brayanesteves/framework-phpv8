@@ -29,7 +29,11 @@
             return $public_path;
         }
 
-        public static function validate($routes) {
+        /**
+         * Example:
+         * http://localhost:8083/framework-phpv8/person/as-12s
+         */
+        public static function validate($routes, $url) {
             foreach($routes as $route) {
                 $regex_route = preg_replace_callback(
                     '/{([^}]+)}/',
@@ -40,7 +44,9 @@
                 );
                 $regex_route = str_replace("/", "\/", $regex_route);
                 $regex_route = '/' . $regex_route . '$/';
-                echo $regex_route;
+                if(preg_match($regex_route, $url, $matches)) {
+                    echo "Route exists.";
+                }
             }
         }
 

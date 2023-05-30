@@ -1,13 +1,14 @@
 <?php
     use Core\Route;
 
-    Route::get  ('/', "Ruta inicial GET");
-    Route::get  ('/api/{id}', "Ruta inicial GET");
-    Route::get  ('/persona/{id}-{nombre}', "Ruta inicial GET");
-    Route::post ('/', "Ruta inicial POST");
-    Route::group('/producto', function() {
-        Route::get  ('/id', "Producto 'id' - GET");
-        Route::post ('/id', "Producto 'id' - POST");
+    Route::get  (                    '/', "Route init GET");
+    Route::get  (            '/api/{id}', "Route init GET");
+    Route::get  ('/person/{id}-{nombre}', "Route init GET");
+    Route::post (           '/test-post', "Route init POST");
+    Route::group(             '/product', function() {
+        Route::get (         '/id', "Product 'id' - GET");
+        Route::post(         '/id', "Product 'id' - POST");
+        Route::post('/name/{name}', "Product 'id' - POST");
     });
 
     $routes = Route::getRoutes();

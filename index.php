@@ -5,5 +5,6 @@
     use Core\Route;
     $request = new Request();
     $routes  = Route::getRoutes();
-    $request->validate($routes);
+    $url     = $request->getURL();
+    $request->validate($routes, $url);
 ?>
