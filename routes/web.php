@@ -19,8 +19,18 @@
     Route::post (           '/test-post', "Test@index");
     Route::group(             '/product', function() {
         Route::get (         '/id', "Product 'id' - GET");
-        Route::post(         '/id', "Product 'id' - POST");
-        Route::post('/name/{name}', "Product 'id' - POST");
+        Route::get (       '/view', function() {
+            return view("index");
+        });
+        Route::post(            '/id', "Product 'id' - POST");
+        Route::post(   '/name/{name}', "Product 'id' - POST");
+        /**
+         * Example:
+         * http://localhost:8083/framework-phpv8/product/hello
+         */
+        Route::get('/{name}', function($route) {
+            return view("product.index", ["name" => $route['name']]);
+        });
     });
 
     $routes = Route::getRoutes();

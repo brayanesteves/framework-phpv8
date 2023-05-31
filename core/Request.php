@@ -75,11 +75,11 @@
                         if(is_array($response)) {
                             $response = json_encode($response);
                             header('Content-Type: application/json');
-                            echo $response;
+                            // echo $response;
                             return false;
                         } else {
-                            header('Content-Type: application/json');
-                            echo $response;
+                            // header('Content-Type: application/json');
+                            // echo $response;
                             return $response;
                         }
                     }
